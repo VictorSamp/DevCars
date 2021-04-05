@@ -29,7 +29,7 @@ namespace DevCars.API.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult Put()
+        public IActionResult Put(int id, [FromBody] UpdateCarInputModel model)
         {
             return Ok();
         }
