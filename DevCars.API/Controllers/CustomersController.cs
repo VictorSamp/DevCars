@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DevCars.API.InputModels;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,19 +11,19 @@ namespace DevCars.API.Controllers
     public class CostumersController : ControllerBase
     {
         [HttpPost]
-        public IActionResult Post()
+        public IActionResult Post([FromBody] AddCustomerInputModel model)
         {
             return Ok();
         }
 
         [HttpPost("{id}")]
-        public IActionResult PostOrder(int id)
+        public IActionResult PostOrder(int id, [FromBody] AddOrderInputModel model)
         {
             return Ok();
         }
 
         [HttpGet("{id}/orders/{orderId}")]
-        public IActionResult GetOrder(int id, int orderId)
+        public IActionResult GetOrder(int id)
         {
             return Ok();
         }
