@@ -20,6 +20,8 @@ namespace DevCars.API.Persistence
             Customers = new List<Customer>
             {
                 new Customer(1, "LUCIANO", "1234567", new DateTime(1990,1,1)),
+                new Customer(2, "GUSTAVO", "1234567", new DateTime(1990,1,1)),
+                new Customer(3, "GABRIEL", "1234567", new DateTime(1990,1,1))
             };
         }
 
