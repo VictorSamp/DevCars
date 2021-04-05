@@ -21,15 +21,15 @@ namespace DevCars.API.Entities
             RegisteredAt = DateTime.Now;
         }
 
-        public int Id { get; set; }
-        public string VinCode { get; set; }
-        public string Brand { get; set; }
-        public string Model { get; set; }
-        public int Year { get; set; }
-        public decimal Price { get; set; }
-        public string Color { get; set; }
-        public DateTime ProductionDate { get; set; }
-        public CarStatusEnum Status { get; set; }
-        public DateTime RegisteredAt { get; set; }
+        public int Id { get; private set; }
+        public string VinCode { get; private set; }
+        public string Brand { get; private set; }
+        public string Model { get; private set; }
+        public int Year { get; private set; }
+        public decimal Price { get; private set; }
+        public string Color { get; private set; }
+        public DateTime ProductionDate { get; private set; }
+        public CarStatusEnum Status { get; private set; }
+        public DateTime RegisteredAt { get; private set; }
     }
 }
