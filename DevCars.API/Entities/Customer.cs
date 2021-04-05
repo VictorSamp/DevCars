@@ -16,10 +16,10 @@ namespace DevCars.API.Entities
             Orders = new List<Order>();
         }
 
-        public int Id { get; set; }
-        public int FullName { get; set; }
-        public string Document { get; set; }
-        public DateTime BirthDate { get; set; }
-        public List<Order> Orders { get; set; }
+        public int Id { get; private set; }
+        public int FullName { get; private set; }
+        public string Document { get; private set; }
+        public DateTime BirthDate { get; private set; }
+        public List<Order> Orders { get; private set; }
     }
 }
