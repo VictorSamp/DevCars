@@ -1,4 +1,5 @@
-﻿using DevCars.API.Entities;
+﻿using DevCars.API.Configurations;
+using DevCars.API.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -20,44 +21,13 @@ namespace DevCars.API.Persistence
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Car>()
-                .HasKey(c => c.Id);
+            modelBuilder.ApplyConfiguration(new CarDbConfiguration());
 
-            modelBuilder.Entity<Car>()
-                .Property(c => c.Brand)
-                .IsRequired()
-                .HasColumnName("MARCA")
-                .HasColumnType("VARCHAR(100)")
-                .HasDefaultValue("PADRÃO")
-                .HasMaxLength(100)
-                .HasDefaultValueSql("getdate()");
+            modelBuilder.ApplyConfiguration(new CustomerDbConfiguration());
 
-            modelBuilder.Entity<Customer>()
-                .HasKey(c => c.Id);
+            modelBuilder.ApplyConfiguration(new OrderDbConfiguration());
 
-            modelBuilder.Entity<Customer>()
-                .HasMany(c => c.Orders)
-                .WithOne(o => o.Customer)
-                .HasForeignKey(o => o.IdCustomer)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            modelBuilder.Entity<Order>()
-                .HasKey(o => o.Id);
-
-            modelBuilder.Entity<Order>()
-                .HasMany(o => o.ExtraItems)
-                .WithOne()
-                .HasForeignKey(e => e.IdOrder)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            modelBuilder.Entity<Order>()
-                .HasOne(o => o.Car)
-                .WithOne()
-                .HasForeignKey<Order>(o => o.IdCar)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            modelBuilder.Entity<ExtraOrderItem>()
-                .HasKey(e => e.Id);
+            modelBuilder.ApplyConfiguration(new ExtraOrderItemDbConfiguration());
         }
     }
 }
