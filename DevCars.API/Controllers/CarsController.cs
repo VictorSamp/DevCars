@@ -55,7 +55,7 @@ namespace DevCars.API.Controllers
         [HttpPost]
         public IActionResult Post([FromBody] AddCarInputModel model)
         {
-            var car = new Car(4, model.VinCode, model.Brand, model.Model, model.Year, model.Price, model.Color, model.ProductionDate);
+            var car = new Car(model.VinCode, model.Brand, model.Model, model.Year, model.Price, model.Color, model.ProductionDate);
 
             _dbContext.Cars.Add(car);
 
