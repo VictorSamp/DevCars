@@ -28,6 +28,10 @@ namespace DevCars.API.Entities
 
     public class ExtraOrderItem
     {
+        protected ExtraOrderItem()
+        {
+        }
+
         public ExtraOrderItem(string description, decimal price)
         {
             Description = description;
