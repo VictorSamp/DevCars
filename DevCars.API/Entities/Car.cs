@@ -7,6 +7,10 @@ namespace DevCars.API.Entities
 {
     public class Car
     {
+        protected Car()
+        {
+        }
+
         public Car(string vinCode, string brand, string model, int year, decimal price, string color, DateTime productionDate)
         {
             VinCode = vinCode;
