@@ -1,6 +1,7 @@
 ﻿using DevCars.API.Configurations;
 using DevCars.API.Entities;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 namespace DevCars.API.Persistence
 {
@@ -17,13 +18,7 @@ namespace DevCars.API.Persistence
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new CarDbConfiguration());
-
-            modelBuilder.ApplyConfiguration(new CustomerDbConfiguration());
-
-            modelBuilder.ApplyConfiguration(new OrderDbConfiguration());
-
-            modelBuilder.ApplyConfiguration(new ExtraOrderItemDbConfiguration());
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
     }
 }
