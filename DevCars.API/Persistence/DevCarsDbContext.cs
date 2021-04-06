@@ -1,4 +1,4 @@
-﻿using DevCars.API.Configurations;
+﻿using DevCars.API.Persistence.Configurations;
 using DevCars.API.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;

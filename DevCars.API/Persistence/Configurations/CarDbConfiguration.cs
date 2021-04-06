@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace DevCars.API.Configurations
+namespace DevCars.API.Persistence.Configurations
 {
     public class CarDbConfiguration : IEntityTypeConfiguration<Car>
     {
