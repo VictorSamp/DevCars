@@ -7,13 +7,13 @@ namespace DevCars.API.Entities
 {
     public class Order
     {
-        public Order(int id, int idCar, int idCustomer, decimal totalCost)
+        public Order(int id, int idCar, int idCustomer, decimal price, List<ExtraOrderItem> items)
         {
             Id = id;
             IdCar = idCar;
             IdCustomer = idCustomer;
-            TotalCost = totalCost;
-            ExtraItems = new List<ExtraOrderItem>();
+            TotalCost = items.Sum(i => i.Price) + price;
+            ExtraItems = items;
         }
 
         public int Id { get; private set; }
