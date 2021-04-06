@@ -37,5 +37,10 @@ namespace DevCars.API.Entities
             Color = color;
             Price = price;
         }
+
+        public void SetAsSuspended()
+        {
+            Status = CarStatusEnum.Suspended;
+        }
     }
 }
