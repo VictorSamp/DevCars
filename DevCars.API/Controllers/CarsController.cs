@@ -1,6 +1,9 @@
-﻿using DevCars.API.InputModels;
+﻿using DevCars.API.Entities;
+using DevCars.API.InputModels;
 using DevCars.API.Persistence;
+using DevCars.API.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace DevCars.API.Controllers
 {
@@ -17,31 +20,74 @@ namespace DevCars.API.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok();
+            var cars = _dbContext.Cars;
+            var carsViewModel = cars
+                .Select(c => new CarItemViewModel(c.Id, c.Brand, c.Model, c.Price))
+                .ToList();
+
+            return Ok(carsViewModel);
         }
 
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
-            return Ok(id);
+            var car = _dbContext.Cars.SingleOrDefault(c => c.Id == id);
+
+            if (car == null)
+            {
+                return NotFound();
+            }
+
+            var carDetailsViewModel = new CarDetailsViewModel(
+                car.Id,
+                car.Brand,
+                car.Model,
+                car.VinCode,
+                car.Year,
+                car.Price,
+                car.Color,
+                car.ProductionDate
+                );
+
+            return Ok(carDetailsViewModel);
         }
 
         [HttpPost]
         public IActionResult Post([FromBody] AddCarInputModel model)
         {
-            return Ok();
+            var car = new Car(4, model.VinCode, model.Brand, model.Model, model.Year, model.Price, model.Color, model.ProductionDate);
+
+            _dbContext.Cars.Add(car);
+
+            return CreatedAtAction(
+                nameof(GetById),
+                new { id = car.Id },
+                model
+                );
         }
 
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody] UpdateCarInputModel model)
         {
-            return Ok();
+            var car = _dbContext.Cars.SingleOrDefault(c => c.Id == id);
+
+            if (car == null)
+            {
+                return NotFound();
+            }
+
+            car.Update(model.Color, model.Price);
+
+            return NoContent();
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Delete()
+        public IActionResult Delete(int id)
         {
-            return Ok();
+            var car = _dbContext.Cars.SingleOrDefault(c => c.Id == id);
+
+            car.SetAsSuspended();
+            return NoContent();
         }
     }
 }
